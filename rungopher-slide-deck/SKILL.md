@@ -30,7 +30,13 @@ RunGopher enables meaningful connections between organizations and their custome
 
 ### Logo Usage Guidelines
 
-The RunGopher logo should be included on slides for brand consistency. Use the following guidelines:
+**CRITICAL**: The RunGopher logo MUST be included on EVERY slide for brand consistency. This is mandatory, not optional.
+
+**Logo Requirements:**
+- **MUST appear on every slide** in the presentation
+- **Standard placement**: Top-right corner (20px from top, 20px from right)
+- **Alternative placement**: Bottom-right corner (if top-right conflicts with content)
+- **Size**: Approximately 20-24px font size for text-based logo
 
 **Logo Variations:**
 - **Inline logo** (primary): Use for header/footer areas
@@ -172,12 +178,45 @@ For slides with navy backgrounds (especially title slides or section dividers):
 
 ## Critical HTML-to-PPTX Rules
 
-### 0. Typography MUST Be Included in Every Slide
-**CRITICAL**: Every slide HTML MUST include a `<head>` section with `<style>` tag containing the RunGopher typography CSS variables and rules. Without this, typography will not be applied correctly.
+### 0. Consistent Background Colors - MANDATORY
+**CRITICAL**: ALL slides in a presentation MUST use the SAME background color throughout. Do NOT mix navy and white backgrounds.
+
+**Background Color Rules:**
+- **Choose ONE background color** for the entire presentation at the start
+- **Apply it consistently** to every slide
+- **Options**:
+  - **White** (`background-color: #ffffff;`) - Recommended for most presentations
+  - **Navy** (`background-color: #1a3a8c;`) - Use for full navy theme
+  - **Sand** (`background-color: #f1e8d6;`) - Use for subtle theme
+- **DO NOT** switch between colors mid-presentation
+- **Exception**: Title slide can be navy while rest are white (or vice versa), but this must be consistent across all title slides vs content slides
+
+**Implementation:**
+- Set background on `<body>` tag: `<body style="background-color: #ffffff; ...">`
+- Ensure logo color matches background (white logo on navy, black logo on white)
+
+### 1. Logo MUST Be Included on Every Slide
+**CRITICAL**: Every slide MUST include the RunGopher logo in the top-right corner. This is mandatory for brand consistency.
+
+**Logo Template (copy to every slide):**
+```html
+<!-- RunGopher Logo - Top Right (REQUIRED on every slide) -->
+<div style="position: absolute; top: 20px; right: 20px;">
+  <h2 style="color: #000000; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
+</div>
+```
+
+**Logo Color Rules:**
+- **White backgrounds**: Use black logo (`color: #000000;`)
+- **Navy backgrounds**: Use white logo (`color: #ffffff;`)
+- **Sand backgrounds**: Use black logo (`color: #000000;`)
+
+### 2. Typography MUST Be Included in Every Slide
+**CRITICAL**: Every slide HTML MUST include a `<head>` section with `<style>` tag containing the RunGopher typography rules. Without this, typography will not be applied correctly.
 
 See the "Typography" section above for the complete required `<head>` and `<style>` block that must be included in every slide.
 
-### 1. Text Must Be in Proper HTML Tags
+### 3. Text Must Be in Proper HTML Tags
 **CRITICAL**: All text MUST be inside `<p>`, `<h1>`-`<h6>`, `<ul>`, or `<ol>` tags.
 
 ✅ **CORRECT:**
@@ -193,7 +232,7 @@ See the "Typography" section above for the complete required `<head>` and `<styl
 <!-- Text will NOT appear in PowerPoint! -->
 ```
 
-### 2. Use `<ul>` or `<ol>` for Lists
+### 4. Use `<ul>` or `<ol>` for Lists
 Never use manual bullet symbols (•, -, *).
 
 ✅ **CORRECT:**
@@ -210,7 +249,7 @@ Never use manual bullet symbols (•, -, *).
 <p>- Second item</p>
 ```
 
-### 3. Use Row/Col Classes (Not Flexbox)
+### 5. Use Row/Col Classes (Not Flexbox)
 Use `.row` and `.col` utility classes instead of `display: flex`.
 
 ✅ **CORRECT:**
@@ -227,7 +266,7 @@ Use `.row` and `.col` utility classes instead of `display: flex`.
 </div>
 ```
 
-### 4. Web-Safe Fonts Only
+### 6. Web-Safe Fonts Only
 Only use these fonts in HTML:
 - Arial
 - Helvetica
@@ -238,17 +277,17 @@ Only use these fonts in HTML:
 - Tahoma
 - Trebuchet MS
 
-### 5. Never Use `white-space: nowrap`
+### 7. Never Use `white-space: nowrap`
 PowerPoint does NOT respect this CSS property. Use full-width text boxes for titles instead.
 
-### 6. Slide Dimensions
+### 8. Slide Dimensions
 All slides must be **960×540px** (16:9 aspect ratio):
 
 ```html
 <body style="width: 960px; height: 540px;">
 ```
 
-### 7. Slide Layout Zones
+### 9. Slide Layout Zones
 
 **Title Zone** (top 100px, y=0 to y=100):
 - Reserved for slide title (`<h1>`)
@@ -273,7 +312,12 @@ All slides must be **960×540px** (16:9 aspect ratio):
 
 ## Slide Template Structure
 
-### Standard Content Slide
+**IMPORTANT**: All slides MUST have:
+1. Consistent background color (choose white OR navy for entire presentation)
+2. RunGopher logo in top-right corner
+3. Proper typography styles
+
+### Standard Content Slide (White Background - Default)
 ```html
 <!DOCTYPE html>
 <html>
@@ -297,8 +341,8 @@ All slides must be **960×540px** (16:9 aspect ratio):
     }
   </style>
 </head>
-<body class="col" style="width: 960px; height: 540px; position: relative;">
-  <!-- RunGopher Logo - Top Right -->
+<body class="col" style="width: 960px; height: 540px; background-color: #ffffff; position: relative;">
+  <!-- RunGopher Logo - Top Right (REQUIRED on every slide) -->
   <div style="position: absolute; top: 20px; right: 20px;">
     <h2 style="color: #000000; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
   </div>
@@ -329,7 +373,7 @@ All slides must be **960×540px** (16:9 aspect ratio):
 </html>
 ```
 
-### Title Slide (White Background)
+### Title Slide (White Background - Default)
 ```html
 <!DOCTYPE html>
 <html>
@@ -353,8 +397,8 @@ All slides must be **960×540px** (16:9 aspect ratio):
     }
   </style>
 </head>
-<body class="col center" style="width: 960px; height: 540px; position: relative;">
-  <!-- RunGopher Logo - Top Right -->
+<body class="col center" style="width: 960px; height: 540px; background-color: #ffffff; position: relative;">
+  <!-- RunGopher Logo - Top Right (REQUIRED on every slide) -->
   <div style="position: absolute; top: 20px; right: 20px;">
     <h2 style="color: #000000; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
   </div>
@@ -365,6 +409,8 @@ All slides must be **960×540px** (16:9 aspect ratio):
 </body>
 </html>
 ```
+
+**NOTE**: If using navy backgrounds, change `background-color: #ffffff;` to `background-color: #1a3a8c;` and logo color to `#ffffff;` - but use the SAME background color for ALL slides in the presentation.
 
 ### Title Slide (Navy Background - Recommended)
 ```html
@@ -427,8 +473,8 @@ All slides must be **960×540px** (16:9 aspect ratio):
     }
   </style>
 </head>
-<body class="col" style="width: 960px; height: 540px; position: relative;">
-  <!-- RunGopher Logo - Top Right -->
+<body class="col" style="width: 960px; height: 540px; background-color: #ffffff; position: relative;">
+  <!-- RunGopher Logo - Top Right (REQUIRED on every slide) -->
   <div style="position: absolute; top: 20px; right: 20px;">
     <h2 style="color: #000000; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
   </div>
@@ -451,7 +497,7 @@ All slides must be **960×540px** (16:9 aspect ratio):
 </html>
 ```
 
-### Section Divider Slide (Navy Background)
+### Section Divider Slide (Navy Background - Use Only If Entire Presentation Is Navy)
 ```html
 <!DOCTYPE html>
 <html>
