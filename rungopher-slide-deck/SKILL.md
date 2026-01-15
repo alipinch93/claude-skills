@@ -58,29 +58,64 @@ RunGopher enables meaningful connections between organizations and their custome
 
 ## Typography
 
-### Primary Typeface: Poppins Medium
-- **Usage**: Headings, titles, display text
+### Brand Typography Guidelines
+
+**Primary Typeface: Poppins Medium**
+- **Usage**: All headings (`<h1>`, `<h2>`, `<h3>`, etc.), titles, display text
 - **Weight**: Medium (600)
-- **Fallback**: Arial, Helvetica, sans-serif (web-safe)
+- **Web-Safe Substitute**: Arial, Helvetica, sans-serif with font-weight: 600
 
-### Secondary Typeface: Recursive Sans Linear
-- **Usage**: Body text, secondary content
-- **Weight**: Light (300) and Medium Italic (500 italic)
-- **Fallback**: Arial, Helvetica, sans-serif (web-safe)
+**Secondary Typeface: Recursive Sans Linear**
+- **Usage**: Body text (`<p>`), list items (`<li>`), secondary content
+- **Weight**: Light (300) for regular text
+- **Web-Safe Substitute**: Arial, Helvetica, sans-serif with font-weight: 400
 
-**Note**: For HTML-to-PPTX conversion, use web-safe fonts. Poppins and Recursive Sans Linear should be referenced in brand guidelines, but use Arial/Helvetica in actual HTML code.
+### REQUIRED: Typography Implementation
 
-### Typography CSS Variables
-```css
-:root {
-  --font-family-display: Arial, Helvetica, sans-serif;  /* Poppins Medium substitute */
-  --font-weight-display: 600;
-  --font-family-content: Arial, Helvetica, sans-serif;   /* Recursive Sans Linear substitute */
-  --font-weight-content: 400;
-}
+**CRITICAL**: Every slide MUST include a `<style>` tag in the `<head>` section that overrides the CSS variables to apply RunGopher typography:
+
+```html
+<head>
+  <style>
+    :root {
+      /* RunGopher Typography - REQUIRED for all slides */
+      --font-family-display: Arial, Helvetica, sans-serif;  /* Poppins Medium substitute */
+      --font-weight-display: 600;
+      --font-family-content: Arial, Helvetica, sans-serif;   /* Recursive Sans Linear substitute */
+      --font-weight-content: 400;
+    }
+    
+    /* Ensure headings use display font */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-family-display);
+      font-weight: var(--font-weight-display);
+    }
+    
+    /* Ensure body text uses content font */
+    p, li {
+      font-family: var(--font-family-content);
+      font-weight: var(--font-weight-content);
+    }
+  </style>
+</head>
 ```
 
+### Typography Application Rules
+
+1. **ALWAYS include the style tag** in the `<head>` of every slide HTML
+2. **Headings** (`<h1>`, `<h2>`, etc.) automatically use display font (Arial, 600 weight) via CSS variables
+3. **Body text** (`<p>`, `<li>`) automatically use content font (Arial, 400 weight) via CSS variables
+4. **Font weights**: 
+   - Headings: 600 (bold/medium)
+   - Body text: 400 (regular/normal)
+5. **Never use**: Font weights other than 400 (body) or 600 (headings) unless explicitly needed
+
 ## Critical HTML-to-PPTX Rules
+
+### 0. Typography MUST Be Included in Every Slide
+**CRITICAL**: Every slide HTML MUST include a `<head>` section with `<style>` tag containing the RunGopher typography CSS variables and rules. Without this, typography will not be applied correctly.
+
+See the "Typography" section above for the complete required `<head>` and `<style>` block that must be included in every slide.
 
 ### 1. Text Must Be in Proper HTML Tags
 **CRITICAL**: All text MUST be inside `<p>`, `<h1>`-`<h6>`, `<ul>`, or `<ol>` tags.
@@ -180,6 +215,29 @@ All slides must be **960×540px** (16:9 aspect ratio):
 
 ### Standard Content Slide
 ```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    :root {
+      /* RunGopher Typography - REQUIRED */
+      --font-family-display: Arial, Helvetica, sans-serif;
+      --font-weight-display: 600;
+      --font-family-content: Arial, Helvetica, sans-serif;
+      --font-weight-content: 400;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-family-display);
+      font-weight: var(--font-weight-display);
+    }
+    
+    p, li {
+      font-family: var(--font-family-content);
+      font-weight: var(--font-weight-content);
+    }
+  </style>
+</head>
 <body class="col" style="width: 960px; height: 540px;">
   <!-- Title zone -->
   <div style="width: 920px; margin: 0 20px; padding-top: 20px;" class="fit">
@@ -204,19 +262,67 @@ All slides must be **960×540px** (16:9 aspect ratio):
     Source: Data from Q4 2024
   </p>
 </body>
+</html>
 ```
 
 ### Title Slide
 ```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    :root {
+      /* RunGopher Typography - REQUIRED */
+      --font-family-display: Arial, Helvetica, sans-serif;
+      --font-weight-display: 600;
+      --font-family-content: Arial, Helvetica, sans-serif;
+      --font-weight-content: 400;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-family-display);
+      font-weight: var(--font-weight-display);
+    }
+    
+    p, li {
+      font-family: var(--font-family-content);
+      font-weight: var(--font-weight-content);
+    }
+  </style>
+</head>
 <body class="col center" style="width: 960px; height: 540px;">
   <h1 class="text-6xl" style="color: #ff1c4d;">RunGopher</h1>
   <h2 class="text-2xl" style="opacity: 0.7; margin-top: 20px;">Presentation Title</h2>
   <p class="text-lg" style="opacity: 0.5; margin-top: 40px;">Subtitle or Author Name</p>
 </body>
+</html>
 ```
 
 ### Two-Column Layout
 ```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    :root {
+      /* RunGopher Typography - REQUIRED */
+      --font-family-display: Arial, Helvetica, sans-serif;
+      --font-weight-display: 600;
+      --font-family-content: Arial, Helvetica, sans-serif;
+      --font-weight-content: 400;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-family-display);
+      font-weight: var(--font-weight-display);
+    }
+    
+    p, li {
+      font-family: var(--font-family-content);
+      font-weight: var(--font-weight-content);
+    }
+  </style>
+</head>
 <body class="col" style="width: 960px; height: 540px;">
   <div style="width: 920px; margin: 0 20px; padding-top: 20px;" class="fit">
     <h1>Comparison</h1>
@@ -233,6 +339,7 @@ All slides must be **960×540px** (16:9 aspect ratio):
     </div>
   </div>
 </body>
+</html>
 ```
 
 ### Highlighted Content Card
