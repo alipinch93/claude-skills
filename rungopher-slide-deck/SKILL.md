@@ -120,43 +120,55 @@ For slides with navy backgrounds (especially title slides or section dividers):
 
 ### REQUIRED: Typography Implementation
 
-**CRITICAL**: Every slide MUST include a `<style>` tag in the `<head>` section that overrides the CSS variables to apply RunGopher typography:
+**CRITICAL**: PowerPoint does NOT respect CSS variables. Every slide MUST use EXPLICIT font-family declarations. Use direct font-family styles, NOT CSS variables.
+
+**PowerPoint Font Requirements:**
+- **MUST use Arial** (not Calibri, not CSS variables)
+- **Headings**: `font-family: Arial, sans-serif; font-weight: 600;`
+- **Body text**: `font-family: Arial, sans-serif; font-weight: 400;`
+- Apply font-family directly to elements via inline styles or direct CSS selectors
 
 ```html
 <head>
   <style>
-    :root {
-      /* RunGopher Typography - REQUIRED for all slides */
-      --font-family-display: Arial, Helvetica, sans-serif;  /* Poppins Medium substitute */
-      --font-weight-display: 600;
-      --font-family-content: Arial, Helvetica, sans-serif;   /* Recursive Sans Linear substitute */
-      --font-weight-content: 400;
-    }
+    /* RunGopher Typography - REQUIRED for all slides */
+    /* CRITICAL: Use direct font-family, NOT CSS variables - PowerPoint doesn't support CSS variables */
     
-    /* Ensure headings use display font */
+    /* Headings - Poppins Medium substitute (Arial, 600 weight) */
     h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-family-display);
-      font-weight: var(--font-weight-display);
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 600 !important;
     }
     
-    /* Ensure body text uses content font */
-    p, li {
-      font-family: var(--font-family-content);
-      font-weight: var(--font-weight-content);
+    /* Body text - Recursive Sans Linear substitute (Arial, 400 weight) */
+    p, li, span, div {
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 400 !important;
+    }
+    
+    /* Override any default fonts */
+    body {
+      font-family: Arial, Helvetica, sans-serif !important;
     }
   </style>
 </head>
 ```
 
+**IMPORTANT**: Always add inline `style="font-family: Arial, sans-serif;"` to headings and paragraphs as a fallback, since PowerPoint may ignore CSS rules.
+
 ### Typography Application Rules
 
-1. **ALWAYS include the style tag** in the `<head>` of every slide HTML
-2. **Headings** (`<h1>`, `<h2>`, etc.) automatically use display font (Arial, 600 weight) via CSS variables
-3. **Body text** (`<p>`, `<li>`) automatically use content font (Arial, 400 weight) via CSS variables
-4. **Font weights**: 
-   - Headings: 600 (bold/medium)
-   - Body text: 400 (regular/normal)
-5. **Never use**: Font weights other than 400 (body) or 600 (headings) unless explicitly needed
+1. **ALWAYS include the style tag** in the `<head>` of every slide HTML with direct font-family declarations
+2. **ALWAYS add inline styles** to headings: `<h1 style="font-family: Arial, sans-serif; font-weight: 600;">`
+3. **ALWAYS add inline styles** to body text: `<p style="font-family: Arial, sans-serif; font-weight: 400;">`
+4. **PowerPoint Compatibility**: 
+   - PowerPoint does NOT support CSS variables (`var(--font-family)`)
+   - PowerPoint defaults to Calibri if fonts aren't explicitly set
+   - Use `!important` in CSS and inline styles as fallback
+5. **Font weights**: 
+   - Headings: 600 (bold/medium) - Arial
+   - Body text: 400 (regular/normal) - Arial
+6. **Never use**: Calibri, CSS variables, or font weights other than 400 (body) or 600 (headings) unless explicitly needed
 
 ## Critical HTML-to-PPTX Rules
 
@@ -267,22 +279,21 @@ All slides must be **960×540px** (16:9 aspect ratio):
 <html>
 <head>
   <style>
-    :root {
-      /* RunGopher Typography - REQUIRED */
-      --font-family-display: Arial, Helvetica, sans-serif;
-      --font-weight-display: 600;
-      --font-family-content: Arial, Helvetica, sans-serif;
-      --font-weight-content: 400;
-    }
+    /* RunGopher Typography - REQUIRED */
+    /* CRITICAL: Use direct font-family, NOT CSS variables - PowerPoint doesn't support CSS variables */
     
     h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-family-display);
-      font-weight: var(--font-weight-display);
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 600 !important;
     }
     
-    p, li {
-      font-family: var(--font-family-content);
-      font-weight: var(--font-weight-content);
+    p, li, span, div {
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 400 !important;
+    }
+    
+    body {
+      font-family: Arial, Helvetica, sans-serif !important;
     }
   </style>
 </head>
@@ -294,7 +305,7 @@ All slides must be **960×540px** (16:9 aspect ratio):
   
   <!-- Title zone -->
   <div style="width: 920px; margin: 0 20px; padding-top: 20px;" class="fit">
-    <h1 style="margin: 0;">Slide Title</h1>
+    <h1 style="margin: 0; font-family: Arial, sans-serif; font-weight: 600;">Slide Title</h1>
   </div>
 
   <!-- Buffer (10px) -->
@@ -302,10 +313,10 @@ All slides must be **960×540px** (16:9 aspect ratio):
   <!-- Content zone -->
   <div class="fill-height row gap-lg" style="padding: 10px 40px 40px 40px;">
     <div class="col fill-width">
-      <p>Main content goes here...</p>
+      <p style="font-family: Arial, sans-serif; font-weight: 400;">Main content goes here...</p>
       <ul>
-        <li>First point</li>
-        <li>Second point</li>
+        <li style="font-family: Arial, sans-serif; font-weight: 400;">First point</li>
+        <li style="font-family: Arial, sans-serif; font-weight: 400;">Second point</li>
       </ul>
     </div>
   </div>
@@ -324,22 +335,21 @@ All slides must be **960×540px** (16:9 aspect ratio):
 <html>
 <head>
   <style>
-    :root {
-      /* RunGopher Typography - REQUIRED */
-      --font-family-display: Arial, Helvetica, sans-serif;
-      --font-weight-display: 600;
-      --font-family-content: Arial, Helvetica, sans-serif;
-      --font-weight-content: 400;
-    }
+    /* RunGopher Typography - REQUIRED */
+    /* CRITICAL: Use direct font-family, NOT CSS variables - PowerPoint doesn't support CSS variables */
     
     h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-family-display);
-      font-weight: var(--font-weight-display);
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 600 !important;
     }
     
-    p, li {
-      font-family: var(--font-family-content);
-      font-weight: var(--font-weight-content);
+    p, li, span, div {
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 400 !important;
+    }
+    
+    body {
+      font-family: Arial, Helvetica, sans-serif !important;
     }
   </style>
 </head>
@@ -349,9 +359,9 @@ All slides must be **960×540px** (16:9 aspect ratio):
     <h2 style="color: #000000; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
   </div>
   
-  <h1 class="text-6xl" style="color: #ff1c4d;">RunGopher</h1>
-  <h2 class="text-2xl" style="opacity: 0.7; margin-top: 20px;">Presentation Title</h2>
-  <p class="text-lg" style="opacity: 0.5; margin-top: 40px;">Subtitle or Author Name</p>
+  <h1 class="text-6xl" style="color: #ff1c4d; font-family: Arial, sans-serif; font-weight: 600;">RunGopher</h1>
+  <h2 class="text-2xl" style="opacity: 0.7; margin-top: 20px; font-family: Arial, sans-serif; font-weight: 600;">Presentation Title</h2>
+  <p class="text-lg" style="opacity: 0.5; margin-top: 40px; font-family: Arial, sans-serif; font-weight: 400;">Subtitle or Author Name</p>
 </body>
 </html>
 ```
@@ -362,22 +372,21 @@ All slides must be **960×540px** (16:9 aspect ratio):
 <html>
 <head>
   <style>
-    :root {
-      /* RunGopher Typography - REQUIRED */
-      --font-family-display: Arial, Helvetica, sans-serif;
-      --font-weight-display: 600;
-      --font-family-content: Arial, Helvetica, sans-serif;
-      --font-weight-content: 400;
-    }
+    /* RunGopher Typography - REQUIRED */
+    /* CRITICAL: Use direct font-family, NOT CSS variables - PowerPoint doesn't support CSS variables */
     
     h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-family-display);
-      font-weight: var(--font-weight-display);
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 600 !important;
     }
     
-    p, li {
-      font-family: var(--font-family-content);
-      font-weight: var(--font-weight-content);
+    p, li, span, div {
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 400 !important;
+    }
+    
+    body {
+      font-family: Arial, Helvetica, sans-serif !important;
     }
   </style>
 </head>
@@ -387,9 +396,9 @@ All slides must be **960×540px** (16:9 aspect ratio):
     <h2 style="color: #ffffff; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
   </div>
   
-  <h1 class="text-6xl" style="color: #ffffff; margin-top: 80px;">RunGopher</h1>
-  <h2 class="text-2xl" style="color: #ffffff; opacity: 0.9; margin-top: 20px;">Presentation Title</h2>
-  <p class="text-lg" style="color: #ffffff; opacity: 0.7; margin-top: 40px;">Subtitle or Author Name</p>
+  <h1 class="text-6xl" style="color: #ffffff; margin-top: 80px; font-family: Arial, sans-serif; font-weight: 600;">RunGopher</h1>
+  <h2 class="text-2xl" style="color: #ffffff; opacity: 0.9; margin-top: 20px; font-family: Arial, sans-serif; font-weight: 600;">Presentation Title</h2>
+  <p class="text-lg" style="color: #ffffff; opacity: 0.7; margin-top: 40px; font-family: Arial, sans-serif; font-weight: 400;">Subtitle or Author Name</p>
 </body>
 </html>
 ```
@@ -400,22 +409,21 @@ All slides must be **960×540px** (16:9 aspect ratio):
 <html>
 <head>
   <style>
-    :root {
-      /* RunGopher Typography - REQUIRED */
-      --font-family-display: Arial, Helvetica, sans-serif;
-      --font-weight-display: 600;
-      --font-family-content: Arial, Helvetica, sans-serif;
-      --font-weight-content: 400;
-    }
+    /* RunGopher Typography - REQUIRED */
+    /* CRITICAL: Use direct font-family, NOT CSS variables - PowerPoint doesn't support CSS variables */
     
     h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-family-display);
-      font-weight: var(--font-weight-display);
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 600 !important;
     }
     
-    p, li {
-      font-family: var(--font-family-content);
-      font-weight: var(--font-weight-content);
+    p, li, span, div {
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 400 !important;
+    }
+    
+    body {
+      font-family: Arial, Helvetica, sans-serif !important;
     }
   </style>
 </head>
@@ -426,17 +434,17 @@ All slides must be **960×540px** (16:9 aspect ratio):
   </div>
   
   <div style="width: 920px; margin: 0 20px; padding-top: 20px;" class="fit">
-    <h1>Comparison</h1>
+    <h1 style="font-family: Arial, sans-serif; font-weight: 600;">Comparison</h1>
   </div>
   
   <div class="fill-height row gap-lg items-fill-width" style="padding: 10px 40px 40px 40px;">
     <div class="col">
-      <h2>Left Column</h2>
-      <p>Content for left side...</p>
+      <h2 style="font-family: Arial, sans-serif; font-weight: 600;">Left Column</h2>
+      <p style="font-family: Arial, sans-serif; font-weight: 400;">Content for left side...</p>
     </div>
     <div class="col">
-      <h2>Right Column</h2>
-      <p>Content for right side...</p>
+      <h2 style="font-family: Arial, sans-serif; font-weight: 600;">Right Column</h2>
+      <p style="font-family: Arial, sans-serif; font-weight: 400;">Content for right side...</p>
     </div>
   </div>
 </body>
@@ -449,22 +457,21 @@ All slides must be **960×540px** (16:9 aspect ratio):
 <html>
 <head>
   <style>
-    :root {
-      /* RunGopher Typography - REQUIRED */
-      --font-family-display: Arial, Helvetica, sans-serif;
-      --font-weight-display: 600;
-      --font-family-content: Arial, Helvetica, sans-serif;
-      --font-weight-content: 400;
-    }
+    /* RunGopher Typography - REQUIRED */
+    /* CRITICAL: Use direct font-family, NOT CSS variables - PowerPoint doesn't support CSS variables */
     
     h1, h2, h3, h4, h5, h6 {
-      font-family: var(--font-family-display);
-      font-weight: var(--font-weight-display);
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 600 !important;
     }
     
-    p, li {
-      font-family: var(--font-family-content);
-      font-weight: var(--font-weight-content);
+    p, li, span, div {
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-weight: 400 !important;
+    }
+    
+    body {
+      font-family: Arial, Helvetica, sans-serif !important;
     }
   </style>
 </head>
@@ -474,8 +481,8 @@ All slides must be **960×540px** (16:9 aspect ratio):
     <h2 style="color: #ffffff; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
   </div>
   
-  <h1 class="text-5xl" style="color: #ffffff; margin-top: 150px;">Section Title</h1>
-  <p class="text-xl" style="color: #ffffff; opacity: 0.8; margin-top: 30px;">Section subtitle or description</p>
+  <h1 class="text-5xl" style="color: #ffffff; margin-top: 150px; font-family: Arial, sans-serif; font-weight: 600;">Section Title</h1>
+  <p class="text-xl" style="color: #ffffff; opacity: 0.8; margin-top: 30px; font-family: Arial, sans-serif; font-weight: 400;">Section subtitle or description</p>
 </body>
 </html>
 ```
