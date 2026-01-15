@@ -26,6 +26,44 @@ RunGopher enables meaningful connections between organizations and their custome
 - **Vibrant & Progressive**: Energy and optimism
 - **Confident & Intelligent**: Professional, authoritative, knowledgeable
 
+## Brand Logo
+
+### Logo Usage Guidelines
+
+The RunGopher logo should be included on slides for brand consistency. Use the following guidelines:
+
+**Logo Variations:**
+- **Inline logo** (primary): Use for header/footer areas
+- **Stacked logo**: Use when vertical space is limited
+- **Wordmark**: Use when iconmark is too small
+- **Iconmark**: Use only when "RunGopher" text appears nearby
+
+**Logo Placement:**
+- **Header**: Top-right corner (recommended for most slides)
+- **Footer**: Bottom-right corner (alternative option)
+- **Clear space**: Maintain clear space equal to the height of the "o" in RunGopher
+
+**Logo on Backgrounds:**
+- **White logo** on navy/dark backgrounds (Accent Cobalt or Navy)
+- **Black logo** on light backgrounds (White or Sand)
+- Ensure sufficient contrast for visibility
+
+**Implementation:**
+Since logo files need to be provided separately, use placeholder instructions or SVG/text-based logo representation in HTML. The logo should be positioned absolutely in the header/footer area.
+
+### Logo HTML Template
+```html
+<!-- Logo in header (top-right) -->
+<div style="position: absolute; top: 20px; right: 20px; width: 120px; height: auto;">
+  <img src="rungopher-logo-white.svg" alt="RunGopher" style="width: 100%; height: auto;" />
+</div>
+
+<!-- Or text-based logo placeholder -->
+<div style="position: absolute; top: 20px; right: 20px;">
+  <h2 style="color: #ffffff; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 24px;">RunGopher</h2>
+</div>
+```
+
 ## Brand Colors
 
 ### Color Palette
@@ -35,7 +73,8 @@ RunGopher enables meaningful connections between organizations and their custome
 | Primary White | `#ffffff` | R:255 G:255 B:255 | Background, space |
 | Secondary Sand | `#f1e8d6` | R:241 G:232 B:214 | Subtle backgrounds |
 | Accent Coral | `#ff1c4d` | R:255 G:28 B:77 | Primary accent, CTAs |
-| Accent Cobalt | `#3259fe` | R:50 G:89 B:254 | Secondary accent |
+| Accent Cobalt | `#3259fe` | R:50 G:89 B:254 | Secondary accent (bright blue) |
+| Navy | `#1a3a8c` | R:26 G:58 B:140 | Dark navy for backgrounds with logo |
 | Accent Black | `#000000` | R:0 G:0 B:0 | Body text |
 
 ### Color Usage Guidelines
@@ -53,8 +92,17 @@ RunGopher enables meaningful connections between organizations and their custome
   --color-muted: #f1e8d6;            /* Secondary Sand */
   --color-surface: #ffffff;          /* Primary White */
   --color-surface-foreground: #000000; /* Accent Black */
+  --color-navy: #1a3a8c;            /* Navy for backgrounds */
 }
 ```
+
+### Navy Background Option
+
+For slides with navy backgrounds (especially title slides or section dividers):
+- Use Navy color (`#1a3a8c`) for full slide backgrounds
+- Place white RunGopher logo in top-right corner
+- Use white text for headings and content
+- Maintain brand consistency while creating visual impact
 
 ## Typography
 
@@ -238,7 +286,12 @@ All slides must be **960×540px** (16:9 aspect ratio):
     }
   </style>
 </head>
-<body class="col" style="width: 960px; height: 540px;">
+<body class="col" style="width: 960px; height: 540px; position: relative;">
+  <!-- RunGopher Logo - Top Right -->
+  <div style="position: absolute; top: 20px; right: 20px;">
+    <h2 style="color: #000000; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
+  </div>
+  
   <!-- Title zone -->
   <div style="width: 920px; margin: 0 20px; padding-top: 20px;" class="fit">
     <h1 style="margin: 0;">Slide Title</h1>
@@ -265,7 +318,7 @@ All slides must be **960×540px** (16:9 aspect ratio):
 </html>
 ```
 
-### Title Slide
+### Title Slide (White Background)
 ```html
 <!DOCTYPE html>
 <html>
@@ -290,10 +343,53 @@ All slides must be **960×540px** (16:9 aspect ratio):
     }
   </style>
 </head>
-<body class="col center" style="width: 960px; height: 540px;">
+<body class="col center" style="width: 960px; height: 540px; position: relative;">
+  <!-- RunGopher Logo - Top Right -->
+  <div style="position: absolute; top: 20px; right: 20px;">
+    <h2 style="color: #000000; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
+  </div>
+  
   <h1 class="text-6xl" style="color: #ff1c4d;">RunGopher</h1>
   <h2 class="text-2xl" style="opacity: 0.7; margin-top: 20px;">Presentation Title</h2>
   <p class="text-lg" style="opacity: 0.5; margin-top: 40px;">Subtitle or Author Name</p>
+</body>
+</html>
+```
+
+### Title Slide (Navy Background - Recommended)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    :root {
+      /* RunGopher Typography - REQUIRED */
+      --font-family-display: Arial, Helvetica, sans-serif;
+      --font-weight-display: 600;
+      --font-family-content: Arial, Helvetica, sans-serif;
+      --font-weight-content: 400;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-family-display);
+      font-weight: var(--font-weight-display);
+    }
+    
+    p, li {
+      font-family: var(--font-family-content);
+      font-weight: var(--font-weight-content);
+    }
+  </style>
+</head>
+<body class="col center" style="width: 960px; height: 540px; background-color: #1a3a8c; position: relative;">
+  <!-- RunGopher Logo - Top Right (White) -->
+  <div style="position: absolute; top: 20px; right: 20px;">
+    <h2 style="color: #ffffff; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
+  </div>
+  
+  <h1 class="text-6xl" style="color: #ffffff; margin-top: 80px;">RunGopher</h1>
+  <h2 class="text-2xl" style="color: #ffffff; opacity: 0.9; margin-top: 20px;">Presentation Title</h2>
+  <p class="text-lg" style="color: #ffffff; opacity: 0.7; margin-top: 40px;">Subtitle or Author Name</p>
 </body>
 </html>
 ```
@@ -323,7 +419,12 @@ All slides must be **960×540px** (16:9 aspect ratio):
     }
   </style>
 </head>
-<body class="col" style="width: 960px; height: 540px;">
+<body class="col" style="width: 960px; height: 540px; position: relative;">
+  <!-- RunGopher Logo - Top Right -->
+  <div style="position: absolute; top: 20px; right: 20px;">
+    <h2 style="color: #000000; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
+  </div>
+  
   <div style="width: 920px; margin: 0 20px; padding-top: 20px;" class="fit">
     <h1>Comparison</h1>
   </div>
@@ -338,6 +439,43 @@ All slides must be **960×540px** (16:9 aspect ratio):
       <p>Content for right side...</p>
     </div>
   </div>
+</body>
+</html>
+```
+
+### Section Divider Slide (Navy Background)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    :root {
+      /* RunGopher Typography - REQUIRED */
+      --font-family-display: Arial, Helvetica, sans-serif;
+      --font-weight-display: 600;
+      --font-family-content: Arial, Helvetica, sans-serif;
+      --font-weight-content: 400;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-family-display);
+      font-weight: var(--font-weight-display);
+    }
+    
+    p, li {
+      font-family: var(--font-family-content);
+      font-weight: var(--font-weight-content);
+    }
+  </style>
+</head>
+<body class="col center" style="width: 960px; height: 540px; background-color: #1a3a8c; position: relative;">
+  <!-- RunGopher Logo - Top Right (White) -->
+  <div style="position: absolute; top: 20px; right: 20px;">
+    <h2 style="color: #ffffff; font-family: Arial, sans-serif; font-weight: 600; margin: 0; font-size: 20px;">RunGopher</h2>
+  </div>
+  
+  <h1 class="text-5xl" style="color: #ffffff; margin-top: 150px;">Section Title</h1>
+  <p class="text-xl" style="color: #ffffff; opacity: 0.8; margin-top: 30px;">Section subtitle or description</p>
 </body>
 </html>
 ```
