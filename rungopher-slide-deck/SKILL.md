@@ -609,10 +609,12 @@ All slides must be **960×540px** (16:9 aspect ratio):
 5. **Follow layout zones**: Respect title, content, footnote areas
 
 ### Technical Checklist
+- [ ] **Consistent background color** - ALL slides use the SAME background (white OR navy, not mixed)
+- [ ] **Logo on every slide** - RunGopher logo in top-right corner of EVERY slide
 - [ ] All text is in `<p>`, `<h1>`-`<h6>`, `<ul>`, or `<ol>` tags
 - [ ] Using `.row` and `.col` classes (not flexbox)
 - [ ] No manual bullet symbols
-- [ ] Only web-safe fonts (Arial, Helvetica)
+- [ ] Only web-safe fonts (Arial, Helvetica) with explicit font-family
 - [ ] No `white-space: nowrap`
 - [ ] Slide dimensions: 960×540px
 - [ ] Title uses full-width wrapper (920px)
